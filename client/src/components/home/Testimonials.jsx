@@ -12,7 +12,9 @@ export default function Testimonials() {
   useEffect(() => {
     const fetchTestimonials = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/testimonials");
+        const res = await fetch(
+          "https://satya-constructions.onrender.com/api/testimonials",
+        );
         const data = await res.json();
         setTestimonials(data);
       } catch (error) {

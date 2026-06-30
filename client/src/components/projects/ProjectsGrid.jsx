@@ -11,7 +11,9 @@ export default function ProjectsGrid({ activeTab }) {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/projects");
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}/api/projects`,
+        );
         const data = await response.json();
         setProjects(data);
       } catch (error) {

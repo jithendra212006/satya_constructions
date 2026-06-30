@@ -18,7 +18,7 @@ export default function ProjectDetailsPage({ params }) {
       try {
         const { slug } = await params;
         const response = await fetch(
-          `http://localhost:5000/api/projects?slug=${slug}`,
+          `${process.env.NEXT_PUBLIC_API_URL}/api/projects`,
         );
         const data = await response.json();
 
