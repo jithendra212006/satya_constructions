@@ -1,10 +1,32 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowLeft, MapPin, MessageCircle } from "lucide-react";
+import {
+  ArrowLeft,
+  MapPin,
+  MessageCircle,
+  ArrowDownCircle,
+} from "lucide-react";
 import { ebGaramond } from "@/lib/fonts";
 
 export default function ProjectHero({ project }) {
+  // Smooth scroll handler to jump directly to the gallery section
+  const scrollToGallery = () => {
+    const gallerySection = document
+      .evaluate(
+        "//h2[text()='Project Gallery']",
+        document,
+        null,
+        XPathResult.FIRST_ORDERED_NODE_TYPE,
+        null,
+      )
+      .singleNodeValue?.closest("section");
+
+    if (gallerySection) {
+      gallerySection.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
   return (
     <section className="relative overflow-hidden">
       {/* Placeholder Banner */}
@@ -100,10 +122,53 @@ export default function ProjectHero({ project }) {
           {project.location}
         </div>
 
+        {/* HIGHLY VISIBLE DYNAMIC SCROLL PROMPT */}
+        <div className="mt-10 flex items-start">
+          <button
+            onClick={scrollToGallery}
+            className="
+              group
+              relative
+              inline-flex
+              items-center
+              gap-4
+              rounded-full
+              bg-gradient-to-r from-violet-600 to-fuchsia-600
+              px-8 py-4
+              text-white
+              font-bold
+              uppercase
+              tracking-widest
+              text-xs md:text-sm
+              shadow-[0_0_30px_rgba(167,139,250,0.5)]
+              hover:shadow-[0_0_50px_rgba(167,139,250,0.8)]
+              ring-2 ring-white/20 ring-offset-2 ring-offset-black/50
+              transition-all
+              duration-300
+              hover:-translate-y-1
+              hover:scale-105
+            "
+          >
+            {/* Animated Ping Dot */}
+            <span className="relative flex h-3 w-3">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-3 w-3 bg-white"></span>
+            </span>
+
+            <span>Click me OR Scroll & Click Images to View Building</span>
+
+            {/* Bouncing Arrow */}
+            <ArrowDownCircle
+              size={22}
+              className="animate-bounce drop-shadow-md"
+            />
+          </button>
+        </div>
+
         {/* Pricing Card */}
         <div
           className="
-            mt-12
+            mt-14
             max-w-3xl
             rounded-[32px]
             border border-white/10
